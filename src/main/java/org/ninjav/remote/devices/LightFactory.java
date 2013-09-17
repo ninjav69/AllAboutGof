@@ -4,8 +4,6 @@
  */
 package org.ninjav.remote.devices;
 
-import org.ninjav.remote.devices.Light;
-
 /**
  *
  * @author ninjav

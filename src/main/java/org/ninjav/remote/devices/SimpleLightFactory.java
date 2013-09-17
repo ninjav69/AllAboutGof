@@ -1,13 +1,12 @@
 package org.ninjav.remote.devices;
 
-import org.ninjav.remote.devices.LightFactory;
-
 public class SimpleLightFactory implements LightFactory {
 
     /**
      *
      * @param location
      */
+    @Override
     public Light createLight(String location) {
         return new Light(location);
     }
