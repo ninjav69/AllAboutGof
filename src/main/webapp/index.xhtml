@@ -12,7 +12,7 @@
     <ui:define name="content">
         <p:panel header="Remote Control">
             <h:form>
-
+                <p:growl id="growl" autoUpdate="true"/>
                 <h:panelGrid columns="4" cellpadding="8">
                     <p:outputLabel value="#{remoteController.kitchenLight.location}"/>
                     <p:commandButton value="On" actionListener="#{remoteController.onButtonPressed(0)}" update="@form"/>
@@ -23,6 +23,12 @@
                     <p:commandButton value="On" actionListener="#{remoteController.onButtonPressed(1)}" update="@form"/>
                     <p:commandButton value="Off" actionListener="#{remoteController.offButtonPressed(1)}" update="@form"/>
                     <p:outputLabel value="#{remoteController.bathroomLight.status}"/>
+
+                    <p:outputLabel value="${remoteController.kitchenFan.location}"/>
+                    <p:commandButton value="On" actionListener="#{remoteController.onButtonPressed(2)}" update="@form"/>
+                    <p:commandButton value="Off" actionListener="#{remoteController.offButtonPressed(2)}" update="@form"/>
+                    <p:outputLabel value="#{remoteController.kitchenFan.status}"/>
+
                 </h:panelGrid>
 
             </h:form>
