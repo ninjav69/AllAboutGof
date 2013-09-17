@@ -12,6 +12,8 @@ import org.ninjav.remote.LightOffCommand;
 import org.ninjav.remote.LightOnCommand;
 import org.ninjav.remote.RemoteControl;
 import org.ninjav.remote.devices.Light;
+import org.ninjav.remote.devices.LightFactory;
+import org.ninjav.remote.devices.SimpleLightFactory;
 
 /**
  *
@@ -23,25 +25,26 @@ public class RemoteController implements Serializable {
 
     private Light kitchenLight;
     private Light bathroomLight;
-    private LightOnCommand kitchenOnCommand;
-    private LightOffCommand kitchenOffCommand;
-    private LightOnCommand bathroomOnCommand;
-    private LightOffCommand bathroomOffCommand;
     private RemoteControl rc;
 
     public RemoteController() {
-        kitchenLight = new Light("Kitchen");
-        bathroomLight = new Light("Bathroom");
-
-        kitchenOnCommand = new LightOnCommand(kitchenLight);
-        kitchenOffCommand = new LightOffCommand(kitchenLight);
-
-        bathroomOnCommand = new LightOnCommand(bathroomLight);
-        bathroomOffCommand = new LightOffCommand(bathroomLight);
+        // Better to have a factory instantiate the lights. That way we
+        // can change the family of lights by changing the factory.
+        // We could later extend Light by adding a decorator that implements
+        // the observer design pattern - giving us added functionality that
+        // addresses cross-cutting concerns (that of introducing events) without
+        // changing the code of Light.
+        LightFactory lightFactory = new SimpleLightFactory();
+        kitchenLight = lightFactory.createLight("Kitchen");
+        bathroomLight = lightFactory.createLight("Bathroom");
 
         rc = new RemoteControl();
-        rc.setCommand(0, kitchenOnCommand, kitchenOffCommand);
-        rc.setCommand(1, bathroomOnCommand, bathroomOffCommand);
+        rc.setCommand(0,
+                new LightOnCommand(kitchenLight),
+                new LightOffCommand(kitchenLight));
+        rc.setCommand(1,
+                new LightOnCommand(bathroomLight),
+                new LightOffCommand(bathroomLight));
     }
 
     public Light getKitchenLight() {
