@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="top">
+        <h1>Command Pattern</h1>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:panel header="Remote Control">
+            <h:form>
+
+                <h:panelGrid columns="4" cellpadding="8">
+                    <p:outputLabel value="#{remoteController.kitchenLight.location}"/>
+                    <p:commandButton value="On" actionListener="#{remoteController.onButtonPressed(0)}" update="@form"/>
+                    <p:commandButton value="Off" actionListener="#{remoteController.offButtonPressed(0)}" update="@form"/>
+                    <p:outputLabel value="#{remoteController.kitchenLight.status}"/>
+
+                    <p:outputLabel value="${remoteController.bathroomLight.location}"/>
+                    <p:commandButton value="On" actionListener="#{remoteController.onButtonPressed(1)}" update="@form"/>
+                    <p:commandButton value="Off" actionListener="#{remoteController.offButtonPressed(1)}" update="@form"/>
+                    <p:outputLabel value="#{remoteController.bathroomLight.status}"/>
+                </h:panelGrid>
+
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
