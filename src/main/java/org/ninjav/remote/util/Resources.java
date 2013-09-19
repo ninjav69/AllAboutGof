@@ -40,8 +40,8 @@ import javax.persistence.PersistenceContext;
 public class Resources {
     // use @SuppressWarnings to tell IDE to ignore warnings about field not being referenced directly
     @SuppressWarnings("unused")
-    @Produces
-    @PersistenceContext
+	@Produces
+	@PersistenceContext
     private EntityManager em;
 
     @Produces
